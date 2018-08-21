@@ -1,0 +1,28 @@
+{
+  "name": "@valala/injectea",
+  "version": "0.1.0",
+  "description": "Dependency injection container",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": [
+    "di",
+    "dependency",
+    "injection",
+    "container"
+  ],
+  "scripts": {
+    "test": "lab -T node_modules/lab-transform-preset-env -c -S --lint"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "code": "^5.2.0",
+    "eslint": "^5.4.0",
+    "lab": "^15.5.0",
+    "lab-transform-preset-env": "^1.1.2"
+  }
+}
