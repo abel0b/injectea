@@ -1,0 +1,14 @@
+stage:
+    - test
+
+test:
+    image: node:10-alpine
+
+    stage: test
+
+    before_script:
+        - npm install --global pnpm
+        - pnpm install
+
+    script:
+        - pnpm test
