@@ -1,4 +1,6 @@
 devDependencies:
+  '@babel/core': 7.0.0-rc.1
+  '@babel/plugin-proposal-decorators': 7.0.0-rc.1
   babel-eslint: 8.2.6
   code: 5.2.0
   eslint: 5.4.0
@@ -259,6 +261,15 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-ewJnWv10AFUh+Yi6axMVQKW8L1pZCm86a44m2biYtXNSyt6FyWgdRloBbR7iCviPkeurfTCVdPS61G/t5cXVkQ==
+  /@babel/plugin-proposal-decorators/7.0.0-rc.1:
+    dependencies:
+      '@babel/helper-plugin-utils': 7.0.0-rc.1
+      '@babel/plugin-syntax-decorators': 7.0.0-rc.1
+    dev: true
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-NRB6aPviuJ82hHkB9tcFFdvl78/ha7yK56E5mesUInmZyvk63TmSyum43s86gq3EFBwZ5tX9FNyT+3xBwHP59Q==
   /@babel/plugin-proposal-object-rest-spread/7.0.0-rc.1/@babel!core@7.0.0-rc.1:
     dependencies:
       '@babel/core': 7.0.0-rc.1
@@ -305,6 +316,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-2F5FYc89TCrqE/8+qFlr5jVMTHfkhEOg9JUx+GXI3inW2OfcY+J6bN8EDc8PLz84PHaR8W630YOuh2PveJu3WA==
+  /@babel/plugin-syntax-decorators/7.0.0-rc.1:
+    dependencies:
+      '@babel/helper-plugin-utils': 7.0.0-rc.1
+    dev: true
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-k45ScWwRlwudaSOTBqeq2/q075omymDA39PvdMuohv9nBlJeLTf6Zceb1njehE/0GHjbr7/2sb5hZ6w4ZU4AEA==
   /@babel/plugin-syntax-object-rest-spread/7.0.0-rc.1/@babel!core@7.0.0-rc.1:
     dependencies:
       '@babel/core': 7.0.0-rc.1
@@ -935,8 +954,8 @@ packages:
       integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==
   /browserslist/3.2.8:
     dependencies:
-      caniuse-lite: 1.0.30000877
-      electron-to-chromium: 1.3.58
+      caniuse-lite: 1.0.30000878
+      electron-to-chromium: 1.3.59
     dev: true
     hasBin: true
     resolution:
@@ -966,10 +985,10 @@ packages:
     optional: true
     resolution:
       integrity: sha1-m7UwTS4LVmmLLHWLCKPqqdqlijk=
-  /caniuse-lite/1.0.30000877:
+  /caniuse-lite/1.0.30000878:
     dev: true
     resolution:
-      integrity: sha512-h04kV/lcuhItU1CZTJOxUEk/9R+1XeJqgc67E+XC8J9TjPM8kzVgOn27ZtRdDUo8O5F8U4QRCzDWJrVym3w3Cg==
+      integrity: sha512-/dCGTdLCnjVJno1mFRn7Y6eit3AYaeFzSrMQHCoK0LEQaWl5snuLex1Ky4b8/Qu2ig5NgTX4cJx65hH9546puA==
   /center-align/0.1.3:
     dependencies:
       align-text: 0.1.4
@@ -1144,10 +1163,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==
-  /electron-to-chromium/1.3.58:
+  /electron-to-chromium/1.3.59:
     dev: true
     resolution:
-      integrity: sha512-AGJxlBEn2wOohxqWZkISVsOjZueKTQljfEODTDSEiMqSpH0S+xzV+/5oEM9AGaqhu7DzrpKOgU7ocQRjj0nJmg==
+      integrity: sha512-PbJGGpDSNn3fyUN1eQESAmnMT+a1QAO4NEZgikDuGOn7tbAuMHF87jNna+NoVsMBfEEYzfpn/ay88HgDCJUbQA==
   /escape-string-regexp/1.0.5:
     dev: true
     engines:
@@ -2457,6 +2476,8 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  '@babel/core': ^7.0.0-rc.1
+  '@babel/plugin-proposal-decorators': ^7.0.0-rc.1
   babel-eslint: ^8.2.6
   code: ^5.2.0
   eslint: ^5.4.0

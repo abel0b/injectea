@@ -19,6 +19,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/plugin-proposal-decorators": "^7.0.0-rc.1",
     "babel-eslint": "^8.2.6",
     "code": "^5.2.0",
     "eslint": "^5.4.0",

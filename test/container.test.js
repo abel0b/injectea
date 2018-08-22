@@ -6,21 +6,78 @@ const lab = Lab.script()
 
 export { lab }
 
-
 lab.experiment('Container', () => {
     lab.test('construct', () => {
         new Container()
     })
 
-    lab.test('register service', () => {
+    lab.test('register service', async () => {
         const container = new Container()
         class Repository {}
-        container.service('Repository', Repository)
-        const rep = container.resolve('Repository')
+        container.service(Repository)
+        const rep = await container.resolve('Repository')
         expect(rep).to.instanceof(Repository)
     })
 
-    lab.test('constructor called once', () => {
+    lab.test('register named service', async () => {
+        const container = new Container()
+        class Repository {}
+        Repository.$di = {name: 'Repository'}
+        container.service(Repository)
+        const rep = await container.resolve('Repository')
+        expect(rep).to.instanceof(Repository)
+    })
+
+    lab.test('resolve bootable service', async () => {
+        let started = false
+        let count = 0
+        class Engine {
+            boot() {
+                started = true
+                count++
+            }
+        }
+        Engine.$di = {
+            boot: 'boot'
+        }
+        const container = new Container()
+        container.service(Engine)
+        await container.resolve('Engine')
+        expect(
+            started
+        ).to.be.true()
+        await container.resolve('Engine')
+        expect(count).to.be.equal(1)
+    })
+
+    lab.test('resolve async bootable service', async () => {
+        let started = false
+        let count = 0
+        class Engine {
+            boot() {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        started = true
+                        count++
+                        resolve()
+                    }, 1000)
+                })
+            }
+        }
+        Engine.$di = {
+            boot: 'boot'
+        }
+        const container = new Container()
+        container.service(Engine)
+        await container.resolve('Engine')
+        expect(
+            started
+        ).to.be.true()
+        await container.resolve('Engine')
+        expect(count).to.be.equal(1)
+    })
+
+    lab.test('constructor called once', async () => {
         let count = 0
         class FakeService {
             constructor() {
@@ -28,54 +85,93 @@ lab.experiment('Container', () => {
             }
         }
         const container = new Container()
-        container.service('FakeService', FakeService)
-        let a = container.resolve('FakeService')
-        let b = container.resolve('FakeService')
+        container.service(FakeService)
+        let a = await container.resolve('FakeService')
+        let b = await container.resolve('FakeService')
         expect(a).to.equal(b)
         expect(count).to.be.equal(1)
     })
 
     lab.test('name conflict', () => {
         const container = new Container()
-        container.constant('foo', 1)
+        container.value('foo', 1)
         expect(
             () => {
-                container.constant('foo', 2)
+                container.value('foo', 2)
             }
         ).to.throw(Error)
     })
 
-    lab.test('undefined dependency', () => {
+    lab.test('undefined dependency', async () => {
         const container = new Container()
         expect(
-            () => {
-                container.resolve('foo')
-            }
-        ).to.throw(Error)
+            container.resolve('foo')
+        ).to.reject(Error)
     })
 
-    lab.test('register constant', () => {
+    lab.test('register value', async () => {
         const container = new Container()
-        const myConst = 42
-        container.constant('num', myConst)
+        const val = 42
+        container.value('num', val)
         expect(
-            container.resolve('num')
+            await container.resolve('num')
         ).to.equal(42)
     })
 
-    lab.test('register factory', () => {
+    lab.test('register factory', async () => {
         const container = new Container()
         const myFactory = function() {
             return 42
         }
-        container.factory('myFactory', myFactory)
+        container.factory(myFactory)
 
         expect(
-            container.resolve('myFactory')()
+            await container.resolve('myFactory')
         ).to.equal(42)
     })
 
-    lab.test('inject dependencies', () => {
+    lab.test('register factory with dependencies', async () => {
+        const container = new Container()
+        const myFactory = function(foo, bar) {
+            return {foo, bar}
+        }
+        myFactory.$di = {
+            name: 'factoryName',
+            inject: ['foo', 'bar']
+        }
+        container.value('foo', {foo: 'foo'})
+        container.value('bar', {bar: 'bar'})
+        container.factory(myFactory)
+
+        const resolved = await container.resolve('factoryName')
+        expect(
+            resolved.foo
+        ).to.be.equal(await container.resolve('foo'))
+        expect(
+            resolved.bar
+        ).to.be.equal(await container.resolve('bar'))
+    })
+
+    lab.test('factory function called once', async () => {
+        const container = new Container()
+        let count = 0
+        const myFactory = function() {
+            count ++
+            return 42
+        }
+        container.factory(myFactory)
+
+        expect(
+            await container.resolve('myFactory')
+        ).to.equal(42)
+        expect(
+            await container.resolve('myFactory')
+        ).to.equal(42)
+
+        expect(count).to.be.equal(1)
+    })
+
+    lab.test('inject dependencies', async () => {
         const container = new Container()
         class Foo {
             constructor(bar, baz) {
@@ -83,18 +179,21 @@ lab.experiment('Container', () => {
                 this.baz = baz
             }
         }
+        Foo.$di = {
+            inject: ['Bar', 'Baz']
+        }
         class Bar {}
         class Baz {}
-        container.service('Foo', Foo, ['Bar', 'Baz'])
-        container.service('Bar', Bar)
-        container.service('Baz', Baz)
+        container.service(Foo)
+        container.service(Bar)
+        container.service(Baz)
 
-        const foo = container.resolve('Foo')
+        const foo = await container.resolve('Foo')
         expect(foo.bar).to.equal(
-            container.resolve('Bar')
+            await container.resolve('Bar')
         )
         expect(foo.baz).to.equal(
-            container.resolve('Baz')
+            await container.resolve('Baz')
         )
     })
 })
