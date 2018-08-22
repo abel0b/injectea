@@ -25,6 +25,6 @@
     "code": "^5.2.0",
     "eslint": "^5.4.0",
     "lab": "^15.5.0",
-    "lab-transform-preset-env": "^1.1.2"
+    "lab-transform-preset-env": "^1.2.0"
   }
 }
