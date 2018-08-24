@@ -1,5 +1,10 @@
 {
-    "plugins": [
-        ["@babel/plugin-proposal-decorators", { "legacy": true }]
-    ]
+    "presets": [
+        ["@babel/preset-env", {
+            "targets": {
+                "node": "8.0.0"
+            }
+        }]
+    ],
+    "plugins": [["@babel/proposal-decorators", {"legacy": true}]]
 }

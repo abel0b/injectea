@@ -2,8 +2,9 @@
   "name": "@valala/injectea",
   "version": "1.0.1",
   "description": "Dependency injection container",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "directories": {
+    "dist": "dist",
     "lib": "lib",
     "test": "test"
   },
@@ -14,17 +15,20 @@
     "container"
   ],
   "scripts": {
-    "test": "lab -T node_modules/lab-transform-preset-env -c -S --lint"
+    "test": "lab -T node_modules/lab-transform-preset-env -c -S --lint",
+    "build": "babel -d dist lib"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.1",
-    "@babel/plugin-proposal-decorators": "^7.0.0-rc.1",
+    "@babel/cli": "^7.0.0-rc.3",
+    "@babel/core": "^7.0.0-rc.3",
+    "@babel/plugin-proposal-decorators": "^7.0.0-rc.3",
+    "@babel/preset-env": "^7.0.0-rc.3",
     "babel-eslint": "^8.2.6",
     "code": "^5.2.0",
-    "eslint": "^5.4.0",
-    "lab": "^15.5.0",
+    "lab": "^16.0.0",
     "lab-transform-preset-env": "^1.2.0"
-  }
+  },
+  "eslintIgnore": ["dist"]
 }
