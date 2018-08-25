@@ -1,6 +1,6 @@
 {
   "name": "@valala/injectea",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Dependency injection container",
   "main": "dist/index.js",
   "directories": {
@@ -30,5 +30,7 @@
     "lab": "^16.0.0",
     "lab-transform-preset-env": "^1.2.0"
   },
-  "eslintIgnore": ["dist"]
+  "eslintIgnore": [
+    "dist"
+  ]
 }
