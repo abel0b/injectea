@@ -1,10 +1,8 @@
 import { expect }  from 'code'
-import * as Lab  from 'lab'
-import Container from '../lib/Container'
+import Lab  from 'lab'
+import {Container, Service, Factory} from '../lib'
 
-const lab = Lab.script()
-
-export { lab }
+export const lab = Lab.script()
 
 lab.experiment('Container', () => {
     lab.test('construct', () => {
@@ -195,5 +193,54 @@ lab.experiment('Container', () => {
         expect(foo.baz).to.equal(
             await container.resolve('Baz')
         )
+    })
+
+    lab.test('register function', () => {
+        lab.experiment('register a service', async () => {
+            const container = new Container()
+
+            @Service({name: 'Bar'})
+            class Foo {
+                baz() {
+                    return 42
+                }
+            }
+
+            container.register(Foo)
+
+            expect(container.resolve('Foo')).to.reject(Error)
+            const foo = await container.resolve('Bar')
+            expect(foo.baz()).to.be.equal(42)
+        })
+        lab.experiment('register a factory', async () => {
+            const container = new Container()
+
+            function Make() {
+                return 0
+            }
+
+            container.register(Factory()(Make))
+
+            const make = await container.resolve('Make')
+            expect(make).to.be.equal(0)
+        })
+        lab.experiment('register a service with default options', async () => {
+            const container = new Container()
+
+            class Foo {}
+
+            container.register(Foo)
+            await container.resolve('Foo')
+        })
+        lab.experiment('register a service with unknown type', async () => {
+            const container = new Container()
+
+            @Service({
+                type: 'unknown'
+            })
+            class Foo {}
+
+            expect(() => container.register(Foo)).to.throw(Error)
+        })
     })
 })
