@@ -15,7 +15,7 @@
     "container"
   ],
   "scripts": {
-    "test": "lab -T node_modules/lab-transform-preset-env -c -S --lint",
+    "test": "lab -T node_modules/lab-transform-preset-env -c -S --lint --lint-fix",
     "build": "babel -d dist lib"
   },
   "author": "",

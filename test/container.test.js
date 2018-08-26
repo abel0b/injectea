@@ -195,12 +195,12 @@ lab.experiment('Container', () => {
         )
     })
 
-    lab.test('register function', () => {
-        lab.experiment('register a service', async () => {
-            const container = new Container()
+
+    lab.test('register a service', async () => {
+        const container = new Container()
 
             @Service({name: 'Bar'})
-            class Foo {
+        class Foo {
                 baz() {
                     return 42
                 }
@@ -211,36 +211,59 @@ lab.experiment('Container', () => {
             expect(container.resolve('Foo')).to.reject(Error)
             const foo = await container.resolve('Bar')
             expect(foo.baz()).to.be.equal(42)
-        })
-        lab.experiment('register a factory', async () => {
-            const container = new Container()
+    })
+    lab.test('register a factory', async () => {
+        const container = new Container()
 
-            function Make() {
-                return 0
-            }
+        function Make() {
+            return 0
+        }
 
-            container.register(Factory()(Make))
+        container.register(Factory()(Make))
 
-            const make = await container.resolve('Make')
-            expect(make).to.be.equal(0)
-        })
-        lab.experiment('register a service with default options', async () => {
-            const container = new Container()
+        const make = await container.resolve('Make')
+        expect(make).to.be.equal(0)
+    })
+    lab.test('register a service with default options', async () => {
+        const container = new Container()
 
-            class Foo {}
+        class Foo {}
 
-            container.register(Foo)
-            await container.resolve('Foo')
-        })
-        lab.experiment('register a service with unknown type', async () => {
-            const container = new Container()
+        container.register(Foo)
+        await container.resolve('Foo')
+    })
+    lab.test('register a service with unknown type', async () => {
+        const container = new Container()
 
             @Service({
                 type: 'unknown'
             })
-            class Foo {}
+        class Foo {}
 
             expect(() => container.register(Foo)).to.throw(Error)
+    })
+
+    lab.test('resolve a service group', async () => {
+        const container = new Container()
+
+        @Service({
+            group: 'foo'
         })
+        class AFoo {}
+
+        @Service({
+            group: 'foo'
+        })
+        class BFoo {}
+
+        container.register(AFoo)
+        container.register(BFoo)
+
+        const deps = await container.resolve('foo')
+        await container.resolve('foo')
+        expect(deps).to.be.an.array()
+        expect(deps.length).to.be.equal(2)
+        expect(deps[0]).to.exist()
+        expect(deps[1]).to.exist()
     })
 })
