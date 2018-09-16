@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "test": "lab -T node_modules/lab-transform-preset-env -c -S --lint --lint-fix",
+    "prepare": "pnpm run build",
     "build": "babel -d dist lib"
   },
   "author": "",
