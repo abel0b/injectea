@@ -1,5 +1,5 @@
-import { expect }  from 'code'
-import Lab  from 'lab'
+import { expect }  from '@hapi/code'
+import Lab  from '@hapi/lab'
 import {Container, Service, Factory} from '../lib'
 
 export const lab = Lab.script()

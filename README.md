@@ -1,5 +1,5 @@
 # Injectea
-[![npm version](https://img.shields.io/npm/v/@valala/injectea.svg)](https://www.npmjs.com/package/@valala/injectea)  [![pipeline status](https://gitlab.com/valala/injectea/badges/master/pipeline.svg)](https://gitlab.com/valala/injectea/commits/master) [![coverage report](https://gitlab.com/valala/injectea/badges/master/coverage.svg)](https://gitlab.com/valala/injectea/commits/master)
+[![npm version](https://img.shields.io/npm/v/abeliam/injectea.svg)](https://www.npmjs.com/package/@abeliam/injectea)  [![pipeline status](https://gitlab.com/abeliam/injectea/badges/master/pipeline.svg)](https://gitlab.com/abeliam/injectea/commits/master) [![coverage report](https://gitlab.com/abeliam/injectea/badges/master/coverage.svg)](https://gitlab.com/abeliam/injectea/commits/master)
 
 Dependency injection container
 
@@ -9,7 +9,7 @@ Dependency injection container
 ## Usage
 Create a container
 ```
-import {Container} from '@valala/injectea'
+import {Container} from 'injectea'
 
 const container = new Container()
 ```
@@ -31,10 +31,7 @@ class Bar {
 }
 
 const container = new Container()
-container.register([
-    Foo,
-    Bar
-])
+container.register(Foo)
 
 const foo = await container.resolve('Foo')
 ```
