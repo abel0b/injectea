@@ -10,4 +10,4 @@ test:
         - npm install
 
     script:
-        - pnpm test
+        - npm test
