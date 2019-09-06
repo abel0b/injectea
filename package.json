@@ -1,8 +1,8 @@
 {
   "name": "injectea",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Dependency injection container library",
-  "author": "Abel Calluaud <abelcd@protonmail.com> (abel.calluaud.net)",
+  "author": "",
   "main": "dist/index.js",
   "module": "lib/index.js",
   "directories": {
@@ -21,7 +21,6 @@
     "prepare": "npm run build",
     "build": "babel -d dist lib"
   },
-  "author": "",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -33,9 +32,8 @@
     "babel-eslint": "^8.2.6",
     "lab-transform-preset-env": "^1.2.0"
   },
-  "license": "MIT",
   "bugs": {
-      "url": "https://github.com/abeliam/injectea/issues"
+    "url": "https://github.com/abeliam/injectea/issues"
   },
   "homepage": "https://github.com/abeliam/injectea",
   "eslintIgnore": [
