@@ -1,5 +1,5 @@
 # Injectea
-[![npm version](https://img.shields.io/npm/v/abeliam/injectea.svg)](https://www.npmjs.com/package/@abeliam/injectea)  [![pipeline status](https://gitlab.com/abeliam/injectea/badges/master/pipeline.svg)](https://gitlab.com/abeliam/injectea/commits/master) [![coverage report](https://gitlab.com/abeliam/injectea/badges/master/coverage.svg)](https://gitlab.com/abeliam/injectea/commits/master)
+[![npm version](https://img.shields.io/npm/v/injectea.svg)](https://www.npmjs.com/package/injectea)  [![pipeline status](https://gitlab.com/abeliam/injectea/badges/master/pipeline.svg)](https://gitlab.com/abeliam/injectea/commits/master) [![coverage report](https://gitlab.com/abeliam/injectea/badges/master/coverage.svg)](https://gitlab.com/abeliam/injectea/commits/master)
 
 Dependency injection container
 
